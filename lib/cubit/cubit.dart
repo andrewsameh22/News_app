@@ -9,6 +9,7 @@ import 'package:news_application/dio_helper.dart';
 import 'package:news_application/modules/business/business_screen.dart';
 import 'package:news_application/modules/science/science_screen.dart';
 import 'package:news_application/modules/sports/sports_screen.dart';
+import 'package:news_application/modules/tech/Technology_screen.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() : super(NewsInitialState());
@@ -17,22 +18,22 @@ class NewsCubit extends Cubit<NewsStates> {
 
   int currentIndex = 0;
   List<BottomNavigationBarItem> bottomItems = [
-    // ignore: prefer_const_constructors
     BottomNavigationBarItem(
       icon: Icon(Icons.business),
       label: 'Business',
     ),
-    // ignore: prefer_const_constructors
     BottomNavigationBarItem(
-      // ignore: prefer_const_constructors
       icon: Icon(Icons.sports),
       label: 'Sports',
     ),
-    // ignore: prefer_const_constructors, prefer_const_constructors
     BottomNavigationBarItem(
       // ignore: prefer_const_constructors
       icon: Icon(Icons.science),
       label: 'Science',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.laptop),
+      label: 'Tech',
     ),
   ];
 
@@ -40,13 +41,15 @@ class NewsCubit extends Cubit<NewsStates> {
     BusinessScreen(),
     SportsScreen(),
     ScienceScreen(),
+    TechnologyScreen(),
   ];
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
-    // if (index == 0) getBusiness();
-    // if (index == 1) getSports();
-    // if (index == 2) getScience();
+    if (index == 0) getBusiness();
+    if (index == 1) getSports();
+    if (index == 2) getScience();
+    if (index == 3) getTechnology();
     emit(NewsBottomNavState());
   }
 
@@ -123,6 +126,34 @@ class NewsCubit extends Cubit<NewsStates> {
       });
     } else {
       emit(NewsGetScienceSuccessState());
+    }
+  }
+
+
+  List<dynamic> technology = [];
+
+  void getTechnology() async {
+    emit(NewsGetTechnologyLoadingState());
+
+    if (technology.length == 0) {
+      DioHelper.getData(
+        url: 'v2/top-headlines',
+        query: {
+          'country': 'eg',
+          'category': 'technology',
+          // 'apiKey': '1914aabca2f049488600e58dc99a93b2',
+          'apiKey': '768cebfc65e247d99938836243b5d4b2',
+        },
+      ).then((value) {
+        technology = value.data['articles'];
+        emit(NewsGetTechnologySuccessState());
+        print(technology[0]['title']);
+      }).catchError((error) {
+        print(error.toString());
+        emit(NewsGetTechnologyErrorState(error.toString()));
+      });
+    } else {
+      emit(NewsGetTechnologySuccessState());
     }
   }
 

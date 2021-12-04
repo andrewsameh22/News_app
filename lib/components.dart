@@ -54,6 +54,7 @@ Widget builArticleItem(article, context) => InkWell(
                     Text(
                       '${article['publishedAt']}',
                       style: TextStyle(
+
                         fontSize: 14.0,
                         color: Colors.grey,
                         fontWeight: FontWeight.w600,
@@ -89,12 +90,14 @@ Widget articleBuilder(list, context, {isSearch = false}) => ConditionalBuilder(
               child: CircularProgressIndicator(),
             ),
     );
+
 Widget TxtFld({
   required TextEditingController controller,
   required TextInputType keyType,
   required String label,
   required Icon picon,
   required onChanged,
+  // labelStyle,
   validator,
   IconButton? sicon,
   bool isPassword = false,
@@ -110,10 +113,12 @@ Widget TxtFld({
       onFieldSubmitted: onSubmit,
       decoration: InputDecoration(
         labelText: label,
+        // labelStyle: labelStyle,
         prefixIcon: picon,
         suffixIcon: sicon != null ? sicon : null,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
+
         ),
       ),
     );

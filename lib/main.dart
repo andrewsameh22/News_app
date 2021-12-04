@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,7 +71,7 @@ class NewsApp extends StatelessWidget {
                 backgroundColor: Colors.white,
                 elevation: 0.0,
                 iconTheme: IconThemeData(
-                  color: Colors.black,
+                  color: Colors.deepOrange,
                 ),
                 titleTextStyle: TextStyle(
                   color: Colors.black,
@@ -88,8 +88,10 @@ class NewsApp extends StatelessWidget {
               ),
             ),
             darkTheme: ThemeData(
+
               scaffoldBackgroundColor: Color(0xff333739),
               primarySwatch: Colors.deepOrange,
+              fixTextFieldOutlineLabel:true ,
               floatingActionButtonTheme: FloatingActionButtonThemeData(
                 backgroundColor: Colors.deepOrange,
               ),
@@ -111,7 +113,7 @@ class NewsApp extends StatelessWidget {
                 backgroundColor: Color(0xff333739),
                 elevation: 0.0,
                 iconTheme: IconThemeData(
-                  color: Colors.white,
+                  color: Colors.deepOrange,
                 ),
                 titleTextStyle: TextStyle(
                   color: Colors.white,

@@ -9,6 +9,7 @@ import 'package:news_application/cubit/states.dart';
 class SearchScreen extends StatelessWidget {
   var searchController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewsStates>(
@@ -16,12 +17,14 @@ class SearchScreen extends StatelessWidget {
       builder: (context, state) {
         var list = NewsCubit.get(context).search;
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+          ),
           body: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: TxtFld(
+
                   controller: searchController,
                   keyType: TextInputType.text,
                   validator: (value) {
@@ -31,6 +34,9 @@ class SearchScreen extends StatelessWidget {
                     return null;
                   },
                   label: 'Search',
+                //   labelStyle: TextStyle(
+                //   color: Colors.deepOrange,
+                // ),
                   picon: Icon(Icons.search),
                   onChanged: (value) {
                     NewsCubit.get(context).getSearch(value);

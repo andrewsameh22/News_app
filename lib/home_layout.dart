@@ -16,7 +16,9 @@ class HomeLayout extends StatelessWidget {
         var cubit = NewsCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text('News App'),
+            title: Text('News App',style: TextStyle(
+              color: Colors.deepOrange,
+            ),),
             actions: [
               IconButton(
                 onPressed: () {
@@ -28,7 +30,7 @@ class HomeLayout extends StatelessWidget {
                   );
                 },
                 icon: Icon(
-                  Icons.search,
+                  Icons.search,color: Colors.deepOrange,
                 ),
               ),
               IconButton(
@@ -37,6 +39,7 @@ class HomeLayout extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.brightness_4_outlined,
+                  color: Colors.deepOrange,
                 ),
               ),
             ],
